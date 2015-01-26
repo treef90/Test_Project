@@ -1,7 +1,10 @@
+#!/usr/bin/env python 
+# -*- coding: utf-8 -*- 
+
 from sqlalchemy import (
+    Integer,
     Column,
     Index,
-    Integer,
     Text,
     )
 
@@ -21,7 +24,8 @@ Base = declarative_base()
 class MyModel(Base):
     __tablename__ = 'models'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
+    email = Column(Text)
+    topic_treatment = Column(Text)
+    text_treatment = Column(Text)
 
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+Index('my_index', MyModel.email, unique=True, mysql_length=255)
