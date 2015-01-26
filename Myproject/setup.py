@@ -12,6 +12,10 @@ requires = [
     'pyramid',
     'pyramid_chameleon',
     'pyramid_debugtoolbar',
+    'pyramid_tm',
+    'SQLAlchemy',
+    'transaction',
+    'zope.sqlalchemy',
     'waitress',
     ]
 
@@ -28,15 +32,16 @@ setup(name='Myproject',
       author='',
       author_email='',
       url='',
-      keywords='web pyramid pylons',
+      keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
+      test_suite='myproject',
       install_requires=requires,
-      tests_require=requires,
-      test_suite="myproject",
       entry_points="""\
       [paste.app_factory]
       main = myproject:main
+      [console_scripts]
+      initialize_Myproject_db = myproject.scripts.initializedb:main
       """,
       )
