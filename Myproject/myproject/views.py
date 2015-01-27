@@ -10,9 +10,17 @@ from .models import (
 
 
 @view_config(route_name='index', renderer='templates/index.jinja2')
-def my_view(request):
+def index(request):
     try:
-        one = DBSession.query(MyModel).filter(MyModel.name == 'one').first()
+        one = DBSession.query(MyModel).filter(MyModel.email == 'test@mail.com').first()
+    except DBAPIError:
+        return Response(conn_err_msg, content_type='text/plain', status_int=500)
+    return {'one': one, 'name': 'World'}
+
+@view_config(route_name='admin', renderer='templates/index.jinja2')
+def admin(request):
+    try:
+        one = DBSession.query(MyModel).filter(MyModel.email == 'test@mail.com').first()
     except DBAPIError:
         return Response(conn_err_msg, content_type='text/plain', status_int=500)
     return {'one': one, 'name': 'World'}
